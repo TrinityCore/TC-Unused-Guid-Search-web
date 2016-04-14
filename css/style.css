@@ -1,3 +1,12 @@
 .container {
   max-width: 900px;
 }
+
+div > strong {
+  display: inline-block;
+  width: 45px;
+}
+
+div > select {
+  width: 78%;
+}

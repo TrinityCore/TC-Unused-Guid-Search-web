@@ -1,10 +1,7 @@
 <?php
 
-# Connection to the world database (address, username, password, database)
-$db = new mysqli("localhost","root","password","world");
-
-if (mysqli_connect_error())
-  die('Connect Error (' . mysqli_connect_errno() . ') '
-      . mysqli_connect_error());
+$dbs = [];
+# Connection to the world database; to add another DB simply add to the array
+// $dbs['shorthand'] = ["address", "username", "password", "database"];
 
 ?>
