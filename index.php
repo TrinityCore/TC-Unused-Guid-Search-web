@@ -1,15 +1,35 @@
 <?php
 require_once("config.php");
 
-$table_creature = 1;
-$table_gameobject = 2;
-$table_waypoint_scripts = 3;
-$table_pool_template = 4;
-$table_game_event = 5;
-$table_creature_equip_template = 6;
-$table_trinity_string = 7;
+$dbLinks  = [];
+$dbErrors = [];
 
-$table_creature_sel = $table_gameobject_sel = $table_waypoint_scripts_sel = $table_pool_template_sel = $table_game_event_sel = $table_creature_equip_template_sel = $table_trinity_string_sel = "";
+$table_creature                = 1;
+$table_gameobject              = 2;
+$table_waypoint_scripts        = 3;
+$table_pool_template           = 4;
+$table_game_event              = 5;
+$table_creature_equip_template = 6;
+$table_trinity_string          = 7;
+
+$table_creature_sel                =
+$table_gameobject_sel              =
+$table_waypoint_scripts_sel        =
+$table_pool_template_sel           =
+$table_game_event_sel              =
+$table_creature_equip_template_sel =
+$table_trinity_string_sel          = "";
+
+foreach ($dbs as $n => $db)
+{
+  $dbLinks[$n] = @new mysqli($db[0], $db[1], $db[2], $db[3]);
+
+  if (mysqli_connect_error())
+  {
+    $dbErrors[] = 'Connect Error (' . mysqli_connect_errno() . ') '. mysqli_connect_error();
+    unset($dbLinks[$n]);
+  }
+}
 
 if (isset($_GET['table']) && $_GET['table'] != "")
 {
@@ -60,16 +80,8 @@ if (isset($_GET['table']) && $_GET['table'] != "")
 }
 
 // make guid search guid continous enabled by default
-$continuos_checked = "checked";
-
-if (isset($_GET['continuos']) && $_GET['continuos'] == "on")
-{
-  $continuos = true;
-}
-else
-{
-  $continuos = false;
-}
+$continuos = (isset($_GET['continuos']) && $_GET['continuos'] == "on");
+$continuos_checked = $continuos ? "checked" : "";
 
 ?>
 
@@ -94,6 +106,13 @@ else
 
       <form style="margin: auto;" class="form-inline" role="form" method="GET">
         <div class="form-group">
+          <strong>DB:</strong>
+          <select name="db" class="text-center">
+<?php
+    foreach ($dbLinks as $n => $l)
+        echo '<option value="'.$n.'" '.(isset($_GET['db']) && $_GET['db'] == $n ? 'selected' : '').'>'.(is_numeric($n) ? $dbs[$n][3] : $n)."</option>\n";
+?>
+          </select><br>
           <strong>Table:</strong>
           <select name="table" class="text-center">
             <option value="<?= $table_creature ?>"<?= $table_creature_sel ?>>`creature`</option>
@@ -127,8 +146,19 @@ else
       <br>
 <?php
 
+if ($dbErrors)
+    echo '<pre>'.implode("\n", $dbErrors).'</pre>';
+
+if (!$dbLinks)
+    die('no db connections could be established');
+
+if (isset($_GET['db']) && empty($dbLinks[$_GET['db']]))
+    die('invalid db selected');
+
 if (isset($_GET['table'])  && $_GET['table'] != null)
 {
+  $db = &$dbLinks[$_GET['db']];
+
   if (isset($_GET['starting-from']) && $_GET['starting-from'] != null)
     $starting_from = $_GET['starting-from'];
   else
@@ -187,7 +217,6 @@ if (isset($_GET['table'])  && $_GET['table'] != null)
           $count++;
         }
 
-        printf("<br>");
         break;
       }
 
@@ -213,8 +242,6 @@ if (isset($_GET['table'])  && $_GET['table'] != null)
           printf("%d<br>", $i);
           $count++;
         }
-
-        printf("<br>");
       }
 
       $last = $current;
