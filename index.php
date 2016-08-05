@@ -275,8 +275,9 @@ $continuous_checked = $continuous ? "checked" : "";
         echo "If your spawn targets $name spawn, creature range starts at $creatureRange, gameobject at $gameObjectRange. Last applied update: $last<br>";
     }
 
-    echo "Example: you are looking to spawn one mob present from wow 1 to wow 7, then you must choice 1 has start range<br>";
-    echo "         if you are looking to spawn one mob present only on 4.3.4 or higher you must choice 250000 for creatures or 200000 for gameobjects<br>";
+    echo "<br>";
+    echo "Example: you are looking to spawn one mob present from wow 1 to wow 7, then you must choose 1 has start range<br>";
+    echo "         if you are looking to spawn one mob present only on 4.3.4 or higher you must choose 250000 for creatures or 200000 for gameobjects<br>";
     echo "</p>";
 
     ?>
