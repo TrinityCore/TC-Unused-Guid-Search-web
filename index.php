@@ -276,8 +276,8 @@ $continuous_checked = $continuous ? "checked" : "";
     }
 
     echo "<br>";
-    echo "Example: you are looking to spawn one mob present from wow 1 to wow 7, then you must choose 1 has start range<br>";
-    echo "         if you are looking to spawn one mob present only on 4.3.4 or higher you must choose 250000 for creatures or 200000 for gameobjects<br>";
+    echo "Example: if you are going to spawn one NPC which has been present from wow 1 to wow 7 on same coordinates, then you must choose 1 as start range, if it was moved of place on wow 4 they you must choose the range of 250000.<br>";
+    echo "         if you are going to spawn one NPC which has been present only on 4.3.4 or higher you must choose 250000<br>";
     echo "</p>";
 
     ?>
