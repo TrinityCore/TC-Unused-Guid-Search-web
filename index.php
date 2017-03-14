@@ -78,7 +78,7 @@ if (isset($_GET['table']) && $_GET['table'] != "") {
 }
 
 // make guid search guid continous enabled by default
-$continuous = (isset($_GET['continuous']) && $_GET['continuous'] == "on");
+$continuous = (!isset($_GET['continuous']) || $_GET['continuous'] == "on");
 $continuous_checked = $continuous ? "checked" : "";
 
 ?>
@@ -140,6 +140,7 @@ $continuous_checked = $continuous ? "checked" : "";
         </div>
         <div class="checkbox">
             <label>
+                <input name="continuous" type="hidden" value="off" />
                 <input name="continuous" type="checkbox" <?= $continuous_checked ?>> Continuous
             </label>
         </div>
