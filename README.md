@@ -1,6 +1,8 @@
 TC-Unused-Guid-Search-web
 =========================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c38a791c0504304bb40c4378dc551a2)](https://www.codacy.com/app/TrinityCore/TC-Unused-Guid-Search-web?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TrinityCore/TC-Unused-Guid-Search-web&amp;utm_campaign=Badge_Grade)
+
 [TrinityCore](https://github.com/TrinityCore/TrinityCore) DataBase Developer Tool to find free GUIDs of following tables:
 
 - creature
